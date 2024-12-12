@@ -1,17 +1,34 @@
-const initialTodos = ['buy groceries', 'walk the dog', 'do laundry', 'test']
+import { useState } from "react";
+import DeleteButton from "./DeleteButton";
 
-export default function ToDoList() {
-
+export default function ToDoList({ todos, setTodos }) {  
   return (
     <ul>
       {
-        initialTodos.map((item) => (
+        todos.length === 0 && <li className="h-full flex justify-center items-center fonte-semibold opacity-50">Start by adding a todo...</li>
+      }
+      {
+        todos.map((item) => (
             <li 
-              key={item} 
+              key={item.id} 
               className='flex justify-between items-center px-8 h-[50px] text-14px] cursor-pointer border-b border-black/[8%]'
+              onClick={() => {
+                setTodos(
+                  todos.map((t) => {
+                    if (t.id === item.id){
+                      return {...t, isCompleted: !t.isCompleted}
+                    }
+                    return t
+                  })
+                )
+              }}
             >
-                <span>{item}</span>
-                <button>❌</button>
+                <span 
+                  className={`${item.isCompleted ?'line-through text-[#ccc]' : '' }`}
+                >
+                  {item.text}
+                </span>
+                <DeleteButton id={item.id} setTodos={setTodos}/>
             </li>
         ))}
 

@@ -1,5 +1,7 @@
-export default function Counter() {
+export default function Counter({ todos }) {
+
+  const completedTodosNumber = todos.filter((todo) => todo.isCompleted === true).length
   return <p>
-  <b>0</b>/0 todos completed
+  <b>{ completedTodosNumber }</b>/{ todos.length } todos completed
 </p>
 }
