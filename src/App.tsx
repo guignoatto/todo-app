@@ -4,10 +4,11 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Sidebar from "./components/Sidebar"
 import ToDoList from "./components/ToDoList"
+import TodoInterface from "./types/types"
 
 function App() {
 
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState<TodoInterface[]>([])
 
   return (
     <div className=" flex justify-center flex-col items-center font-sans bg-[#f1d4b3] min-h-screen">

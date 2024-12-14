@@ -1,7 +1,12 @@
+import TodoInterface from "../types/types"
 import Counter from "./Counter"
 import Logo from "./Logo"
 
-export default function Header({ todos }) {
+interface HeaderProps {
+  todos: TodoInterface[]
+}
+
+export default function Header({ todos } : HeaderProps) {
   return (
     <header className="flex justify-between items-center px-[28px] col-[1/3] row-[1/2] bg-[#fbf5ed] border-b border-black-[0.08]">
         <Logo />

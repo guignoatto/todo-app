@@ -1,7 +1,13 @@
 import { useState } from "react";
 import Button from "./Button";
+import TodoInterface from "../types/types";
 
-export default function AddTodoForm({ todos, setTodos }) {
+interface AddTodoForm {
+  todos: TodoInterface[],
+  setTodos: React.Dispatch<React.SetStateAction<TodoInterface[]>>
+}
+
+export default function AddTodoForm({ todos, setTodos } : AddTodoForm) {
   const [todoText, setTodoText] = useState('')
   return (
   <form

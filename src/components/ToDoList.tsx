@@ -1,7 +1,12 @@
-import { useState } from "react";
+import TodoInterface from "../types/types";
 import DeleteButton from "./DeleteButton";
 
-export default function ToDoList({ todos, setTodos }) {  
+interface TodoListInterface {
+  todos: TodoInterface[],
+  setTodos: React.Dispatch<React.SetStateAction<TodoInterface[]>>
+}
+
+export default function ToDoList({ todos, setTodos } : TodoListInterface) {  
   return (
     <ul>
       {
