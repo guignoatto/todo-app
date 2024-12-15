@@ -1,14 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import BackgroundHeading from "./components/BackgroundHeading"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Sidebar from "./components/Sidebar"
 import ToDoList from "./components/ToDoList"
 import TodoInterface from "./types/types"
+import axios from 'axios';
 
 function App() {
-
   const [todos, setTodos] = useState<TodoInterface[]>([])
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/todos')
+      .then((response) => {
+        setTodos(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar usuários:', error);
+      });
+  }, []);
 
   return (
     <div className=" flex justify-center flex-col items-center font-sans bg-[#f1d4b3] min-h-screen">
