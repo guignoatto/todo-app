@@ -1,3 +1,4 @@
+import axios from "axios";
 import TodoInterface from "../types/types";
 import DeleteButton from "./DeleteButton";
 
@@ -17,15 +18,24 @@ export default function ToDoList({ todos, setTodos } : TodoListInterface) {
             <li 
               key={item.id} 
               className='flex justify-between items-center px-8 h-[50px] text-14px] cursor-pointer border-b border-black/[8%]'
-              onClick={() => {
-                setTodos(
-                  todos.map((t) => {
-                    if (t.id === item.id){
-                      return {...t, isCompleted: !t.isCompleted}
+              onClick={async () => {
+                const updatedTodos = await Promise.all(
+                  todos.map(async (t) => {
+                    if (t.id === item.id) {
+                      try{
+                        const response = await axios.put(`http://localhost:4000/todos/${item.id}`, {
+                          isCompleted: !t.isCompleted,
+                        });
+                        console.log(response)
+                        return { ...t, isCompleted: response.data.updatedUser.isCompleted };
+                      } catch (error) {
+                        console.log(error.message)
+                      }
                     }
-                    return t
+                    return t;
                   })
-                )
+                );
+                setTodos(updatedTodos);
               }}
             >
                 <span 
