@@ -43,7 +43,7 @@ app.delete('/todos/:id', async (req, res) => {
     }
   });
 
-  app.put('/users/:id', async (req, res) => {
+  app.put('/todos/:id', async (req, res) => {
     const { id } = req.params; // Obtém o ID do usuário da URL
     const { isCompleted } = req.body; // Dados enviados no corpo da requisição
   
@@ -53,18 +53,19 @@ app.delete('/todos/:id', async (req, res) => {
           id: Number(id), // Converte o ID para número
         },
         data: {
-          isCompleted,
+          isCompleted: isCompleted,
         },
       });
-      res.status(200).json({ message: 'Usuário atualizado com sucesso!', updatedUser });
+      res.status(200).json({ message: 'Tarefa atualizada com sucesso!', updatedUser });
     } catch (error) {
-      res.status(400).json({ error: 'Erro ao atualizar o usuário. Verifique se o ID é válido e se os dados estão corretos.' });
+      res.status(400).json({ error: 'Erro ao atualizar a tarefa. Verifique se o ID é válido e se os dados estão corretos.' });
     }
   });
 
 app.get('/', (req, res) => {
     res.send('Servidor funcionando! Acesse /users para ver os usuários.');
   });
+  
 
 const PORT = 4000;
 app.listen(PORT, () => {
